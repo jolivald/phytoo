@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "effects",
+  "info": {
+    "name": "Effect"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "plants": {
+      "via": "effects",
+      "collection": "plant",
+      "dominant": true
+    },
+    "description": {
+      "type": "richtext"
+    }
+  }
+}

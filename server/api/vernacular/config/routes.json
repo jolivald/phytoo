@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/vernaculars",
+      "handler": "vernacular.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/vernaculars/count",
+      "handler": "vernacular.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/vernaculars/:id",
+      "handler": "vernacular.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/vernaculars",
+      "handler": "vernacular.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/vernaculars/:id",
+      "handler": "vernacular.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/vernaculars/:id",
+      "handler": "vernacular.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

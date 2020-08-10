@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vernaculars",
+  "info": {
+    "name": "Vernacular"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "plants": {
+      "via": "vernaculars",
+      "collection": "plant"
+    }
+  }
+}
