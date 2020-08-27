@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     fontSize: 32,
     fontWeight: 700,
-    marginLeft: 16
+    marginLeft: 8,
+    marginRight: 8
   },
   search: {
     fontSize: 16,
