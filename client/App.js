@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
+import { AppRegistry, StyleSheet, Image, Text, View } from 'react-native';
 import { Provider as PaperProvider, Appbar } from 'react-native-paper';
 import { expo } from './app.json';
 import Navbar from './components/Navbar';

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   branding: {
     flexGrow: 1,
     fontSize: 32,
-    fontWeight: 700,
+    fontWeight: 'bold',
     marginLeft: 8,
     marginRight: 8
   },
