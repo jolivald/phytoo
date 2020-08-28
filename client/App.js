@@ -1,34 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { AppRegistry, StyleSheet, Image, Text, View } from 'react-native';
-import { Provider as PaperProvider, Appbar } from 'react-native-paper';
+import { AppRegistry, Text, View } from 'react-native';
+import { DefaultTheme, Provider as PaperProvider, Appbar } from 'react-native-paper';
 import { expo } from './app.json';
-import Navbar from './components/Navbar';
-import logo from './assets/favicon_48x48.png'; 
+import TopBar from './components/TopBar';
+// import logo from './assets/favicon_48x48.png'; 
 
+const customTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#008900'
+  }
+}
+
+// StatusBar style= A string, either: 'auto', 'inverted', 'light', or 'dark'.
 export default function App() {
   return (
-    <PaperProvider>
-      <View style={styles.container}>
-        <Appbar style={{ width: "100%" }}>
-          <Appbar.Action icon={logo} onPress={() => {}}/>
-          <Appbar.Content title="Phytoo" subtitle={'Tout naturellement'} />
-          <Appbar.Action icon="magnify" onPress={() => {}} />
-        </Appbar>
-        <Text>Open up App.js to start working on your app!!!</Text>
-        <StatusBar style="auto" />
+    <PaperProvider theme={customTheme}>
+      <View>
+        <StatusBar style="light" hidden={false} />
+        <TopBar />
+        <Text>Open up App.js to start working on your app ... !!!</Text>
       </View>
     </PaperProvider>
   );
 };
 
 AppRegistry.registerComponent(expo.name, () => App);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    //justifyContent: 'center',
-  },
-});
