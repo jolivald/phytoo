@@ -11,3 +11,5 @@ it('strapi is defined', async done => {
   expect(strapi).toBeDefined();
   done();
 });
+
+require('./plants');
