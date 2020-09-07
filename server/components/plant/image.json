@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_plant_images",
+  "info": {
+    "name": "image",
+    "icon": "camera"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}
