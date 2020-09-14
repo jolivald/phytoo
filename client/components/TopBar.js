@@ -1,11 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { Platform } from 'react-native';
-import { Appbar, Searchbar } from 'react-native-paper';
+import { Appbar } from 'react-native-paper';
 import logo from '../assets/logo-white_32.png'; 
 
 const TopBar = ({ navigation }) => {
   const handlePressLogo = () => {
     navigation.navigate('home');
+    // navigation.goBack();
   };
   return (
     <Appbar style={{

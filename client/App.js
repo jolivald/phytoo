@@ -1,15 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { AppRegistry, Text, View } from 'react-native';
-import { DefaultTheme, Provider as PaperProvider, Appbar } from 'react-native-paper';
+import { AppRegistry } from 'react-native';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { expo } from './app.json';
 import TopBar from './components/TopBar';
 import HomeScreen from './components/HomeScreen';
 import SearchScreen from './components/SearchScreen';
 import ResultScreen from './components/ResultScreen';
-// import logo from './assets/favicon_48x48.png';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+
+// StatusBar style= A string, either: 'auto', 'inverted', 'light', or 'dark'.
 
 const customTheme = {
   ...DefaultTheme,
@@ -21,7 +22,6 @@ const customTheme = {
 
 const Stack = createStackNavigator();
 
-// StatusBar style= A string, either: 'auto', 'inverted', 'light', or 'dark'.
 export default function App() {
   return (<>
     <PaperProvider theme={customTheme}>
