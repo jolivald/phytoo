@@ -1,10 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { AppRegistry, Text, View } from 'react-native';
-import { DefaultTheme, Provider as PaperProvider, Appbar } from 'react-native-paper';
+import { AppRegistry } from 'react-native';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { expo } from './app.json';
 import TopBar from './components/TopBar';
-// import logo from './assets/favicon_48x48.png'; 
+import HomeScreen from './components/HomeScreen';
+import SearchScreen from './components/SearchScreen';
+import ResultScreen from './components/ResultScreen';
+
+// StatusBar style= A string, either: 'auto', 'inverted', 'light', or 'dark'.
 
 const customTheme = {
   ...DefaultTheme,
@@ -12,19 +18,28 @@ const customTheme = {
     ...DefaultTheme.colors,
     primary: '#008900'
   }
-}
+};
 
-// StatusBar style= A string, either: 'auto', 'inverted', 'light', or 'dark'.
+const Stack = createStackNavigator();
+
 export default function App() {
-  return (
+  return (<>
     <PaperProvider theme={customTheme}>
-      <View>
-        <StatusBar style="light" hidden={false} />
-        <TopBar />
-        <Text>Open up App.js to start working on your app ... !!!</Text>
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator
+          headerMode="screen"
+          screenOptions={{
+            header: props => (<TopBar {...props} />)
+          }}
+        >
+          <Stack.Screen name="home" component={HomeScreen} />
+          <Stack.Screen name="search" component={SearchScreen} />
+          <Stack.Screen name="result" component={ResultScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </PaperProvider>
-  );
+    <StatusBar style="light" hidden={false} />
+  </>);
 };
 
 AppRegistry.registerComponent(expo.name, () => App);
