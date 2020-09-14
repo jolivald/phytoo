@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_plant_descriptions",
+  "info": {
+    "name": "description",
+    "icon": "ad"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "richtext"
+    }
+  }
+}

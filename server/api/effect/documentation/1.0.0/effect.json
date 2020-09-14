@@ -562,6 +562,9 @@
                 "description": {
                   "type": "string"
                 },
+                "content": {
+                  "type": "dynamiczone"
+                },
                 "created_by": {
                   "type": "string"
                 },
