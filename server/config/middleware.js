@@ -27,8 +27,12 @@ module.exports = {
       enabled: false // TODO: SSL?
     },
     xframe: {
-      enable: true,
+      enabled: true,
       value: 'DENY'
+    },
+    cors: {
+      enabled: true,
+      origin: '*'
     }
   }
 };
