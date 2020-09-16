@@ -7,10 +7,7 @@ const ScreenWrapper = ({ navigation, children }) => {
     navigation.navigate('search');
   };
   return (
-    <View style={{
-      flex: 1,
-      margin: 20
-    }}>
+    <View style={{ flex: 1, margin: 20 }}>
       {children}
       <FAB
         icon="magnify"
