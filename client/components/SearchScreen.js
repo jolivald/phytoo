@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Title, Searchbar } from 'react-native-paper';
+import ScreenWrapper from './ScreenWrapper';
 import ScreenTitle from './ScreenTitle';
 
 const SearchScreen = props => {
   const [searchValue, setSearchValue] = useState('');
   const handleChangeSearch = value => {
-    console.log('searching', value);
     setSearchValue(value);
   };
-  return (<>
+  return (<ScreenWrapper>
     <ScreenTitle label="Rechercher" />
     <Searchbar
         value={searchValue}
@@ -16,7 +16,7 @@ const SearchScreen = props => {
         iconColor="#008900"
         onChangeText={handleChangeSearch}
       />
-  </>);
+  </ScreenWrapper>);
 };
 
 export default SearchScreen;

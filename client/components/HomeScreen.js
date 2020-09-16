@@ -1,14 +1,20 @@
 import React from 'react';
 import { FAB } from 'react-native-paper';
+import ScreenWrapper from './ScreenWrapper';
 import ScreenTitle from './ScreenTitle';
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = props => {
   const handlePress = event => {
-    navigation.navigate('search');
+    props.navigation.navigate('search');
   };
-  return (<>
+  return (<ScreenWrapper {...props}>
     <ScreenTitle label="Bienvenue" />
-    <FAB
+
+  </ScreenWrapper>);
+};
+
+export default HomeScreen;
+/*    <FAB
       icon="magnify"
       onPress={handlePress}
       accessibilityLabel="Rechercher"
@@ -19,8 +25,4 @@ const HomeScreen = ({ navigation }) => {
         bottom: 0,
         backgroundColor: '#008900'
       }}
-    />
-  </>);
-};
-
-export default HomeScreen;
+    />*/

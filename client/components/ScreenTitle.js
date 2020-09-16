@@ -3,7 +3,6 @@ import { Title } from 'react-native-paper';
 
 const ScreenTitle = ({ label }) => (
   <Title style={{
-    marginTop: 10,
     marginBottom: 10,
     color: '#008900'
   }}>
