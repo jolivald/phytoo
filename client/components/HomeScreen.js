@@ -9,7 +9,6 @@ const HomeScreen = props => {
   };
   return (<ScreenWrapper {...props}>
     <ScreenTitle label="Bienvenue" />
-
   </ScreenWrapper>);
 };
 

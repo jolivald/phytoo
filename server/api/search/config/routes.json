@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/search",
+      "handler": "search.simpleSearch",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

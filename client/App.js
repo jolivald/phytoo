@@ -8,6 +8,7 @@ import { expo } from './app.json';
 import TopBar from './components/TopBar';
 import HomeScreen from './components/HomeScreen';
 import SearchScreen from './components/SearchScreen';
+import PlantScreen from './components/PlantScreen';
 import ResultScreen from './components/ResultScreen';
 
 // StatusBar style= A string, either: 'auto', 'inverted', 'light', or 'dark'.
@@ -34,6 +35,7 @@ export default function App() {
         >
           <Stack.Screen name="home" component={HomeScreen} />
           <Stack.Screen name="search" component={SearchScreen} />
+          <Stack.Screen name="plant" component={PlantScreen} />
           <Stack.Screen name="result" component={ResultScreen} />
         </Stack.Navigator>
       </NavigationContainer>

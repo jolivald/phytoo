@@ -1,16 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
 import { FAB } from 'react-native-paper';
+// import { LinearGradient } from 'expo'; // TODO
 
 const ScreenWrapper = ({ navigation, children }) => {
   const handlePress = event => {
     navigation.navigate('search');
   };
   return (
-    <View style={{
-      flex: 1,
-      margin: 20
-    }}>
+    <View style={{ flex: 1, margin: 20 }}>
       {children}
       <FAB
         icon="magnify"
