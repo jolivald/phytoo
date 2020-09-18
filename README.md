@@ -17,13 +17,13 @@ Log into postgres command line:
 
 Initialize cluster, create user and database:
 
-    [postgres] initdb --locale fr_FR.UTF-8 -E UTF8 -D /var/lib/postgres/data
-    [postgres] createuser --interactive
-    [postgres] createdb phytoo
 
-Connect to the database using:
+    [postgres] initdb --locale fr_FR.UTF-8 -E UTF8 -D /var/lib/postgres/data
+    [postgres] pg_createcluster --locale fr_FR.UTF-8 10
 
     $ psql -d phytoo
+    $ psql postgres
+    [postgres] CREATE DATABASE phytoo;
     [postgres] CREATE ROLE phytoo WITH LOGIN PASSPWORD 'change me!' CREATEDB;
     [postgres] GRANT ALL PRIVILEGES ON DATABASE phytoo TO phytoo;
 
