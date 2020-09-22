@@ -11,6 +11,10 @@
   "attributes": {
     "name": {
       "type": "string"
+    },
+    "plants": {
+      "via": "species",
+      "collection": "plant"
     }
   }
 }

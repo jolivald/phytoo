@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/species": {
+    "/effects": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Specie"
+                    "$ref": "#/components/schemas/Effect"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Specie"
+          "Effect"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Specie"
+                  "$ref": "#/components/schemas/Effect"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Specie"
+          "Effect"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewSpecie"
+                "$ref": "#/components/schemas/NewEffect"
               }
             }
           }
         }
       }
     },
-    "/species/count": {
+    "/effects/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Specie"
+          "Effect"
         ],
         "parameters": []
       }
     },
-    "/species/{id}": {
+    "/effects/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Specie"
+                  "$ref": "#/components/schemas/Effect"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Specie"
+          "Effect"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Specie"
+                  "$ref": "#/components/schemas/Effect"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Specie"
+          "Effect"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewSpecie"
+                "$ref": "#/components/schemas/NewEffect"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Specie"
+          "Effect"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Specie": {
+      "Effect": {
         "required": [
           "id"
         ],
@@ -523,6 +523,9 @@
             "type": "string"
           },
           "name": {
+            "type": "string"
+          },
+          "description": {
             "type": "string"
           },
           "plants": {
@@ -661,9 +664,12 @@
           }
         }
       },
-      "NewSpecie": {
+      "NewEffect": {
         "properties": {
           "name": {
+            "type": "string"
+          },
+          "description": {
             "type": "string"
           },
           "plants": {
@@ -684,7 +690,7 @@
   },
   "tags": [
     {
-      "name": "Specie"
+      "name": "Effect"
     }
   ]
 }

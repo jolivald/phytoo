@@ -525,6 +525,52 @@
           "name": {
             "type": "string"
           },
+          "plants": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                },
+                "genus": {
+                  "type": "string"
+                },
+                "species": {
+                  "type": "string"
+                },
+                "vernaculars": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "effects": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "created_by": {
             "required": [
               "id",
@@ -619,6 +665,12 @@
         "properties": {
           "name": {
             "type": "string"
+          },
+          "plants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "vernaculars",
+  "collectionName": "effects",
   "info": {
-    "name": "Vernacular"
+    "name": "Effect"
   },
   "options": {
     "increments": true,
@@ -12,8 +12,11 @@
     "name": {
       "type": "string"
     },
+    "description": {
+      "type": "richtext"
+    },
     "plants": {
-      "via": "vernaculars",
+      "via": "effects",
       "collection": "plant"
     }
   }
