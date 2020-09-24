@@ -1,0 +1,49 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Phytoo",
+    "description": "Tout naturellement",
+    "termsOfService": false,
+    "contact": {
+      "name": "Jolivald Jonathan",
+      "email": false,
+      "url": "https://github.com/jolivald"
+    },
+    "license": {
+      "name": "MIT license",
+      "url": "https://github.com/jolivald/phytoo/blob/master/LICENSE"
+    }
+  },
+  "x-strapi-config": {
+    "path": "/documentation",
+    "showGeneratedFiles": true,
+    "pluginsForWhichToGenerateDoc": []
+  },
+  "servers": [
+    {
+      "url": "http://localhost:1337",
+      "description": "Development server"
+    },
+    {
+      "url": "YOUR_STAGING_SERVER",
+      "description": "Staging server"
+    },
+    {
+      "url": "YOUR_PRODUCTION_SERVER",
+      "description": "Production server"
+    }
+  ],
+  "externalDocs": {
+    "description": "Github repository",
+    "url": "https://github.com/jolivald/phytoo"
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {},
+  "tags": [],
+  "components": {}
+}

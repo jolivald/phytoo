@@ -21,6 +21,20 @@
     "genus": {
       "model": "genus",
       "via": "plants"
+    },
+    "species": {
+      "model": "specie",
+      "via": "plants"
+    },
+    "vernaculars": {
+      "collection": "vernacular",
+      "via": "plants",
+      "dominant": true
+    },
+    "effects": {
+      "collection": "effect",
+      "via": "plants",
+      "dominant": true
     }
   }
 }

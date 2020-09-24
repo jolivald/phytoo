@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/vernaculars": {
+    "/species": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Vernacular"
+                    "$ref": "#/components/schemas/Specie"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Vernacular"
+          "Specie"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Vernacular"
+                  "$ref": "#/components/schemas/Specie"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Vernacular"
+          "Specie"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewVernacular"
+                "$ref": "#/components/schemas/NewSpecie"
               }
             }
           }
         }
       }
     },
-    "/vernaculars/count": {
+    "/species/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Vernacular"
+          "Specie"
         ],
         "parameters": []
       }
     },
-    "/vernaculars/{id}": {
+    "/species/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Vernacular"
+                  "$ref": "#/components/schemas/Specie"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Vernacular"
+          "Specie"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Vernacular"
+                  "$ref": "#/components/schemas/Specie"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Vernacular"
+          "Specie"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewVernacular"
+                "$ref": "#/components/schemas/NewSpecie"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Vernacular"
+          "Specie"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Vernacular": {
+      "Specie": {
         "required": [
           "id"
         ],
@@ -661,7 +661,7 @@
           }
         }
       },
-      "NewVernacular": {
+      "NewSpecie": {
         "properties": {
           "name": {
             "type": "string"
@@ -684,7 +684,7 @@
   },
   "tags": [
     {
-      "name": "Vernacular"
+      "name": "Specie"
     }
   ]
 }

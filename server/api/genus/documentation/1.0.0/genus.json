@@ -550,6 +550,21 @@
                 "genus": {
                   "type": "string"
                 },
+                "species": {
+                  "type": "string"
+                },
+                "vernaculars": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "effects": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },

@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "vernaculars",
+  "collectionName": "species",
   "info": {
-    "name": "Vernacular"
+    "name": "Specie"
   },
   "options": {
     "increments": true,
@@ -13,7 +13,7 @@
       "type": "string"
     },
     "plants": {
-      "via": "vernaculars",
+      "via": "species",
       "collection": "plant"
     }
   }
