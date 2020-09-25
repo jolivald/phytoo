@@ -9,7 +9,9 @@ import TopBar from './components/TopBar';
 import HomeScreen from './components/HomeScreen';
 import SearchScreen from './components/SearchScreen';
 import PlantScreen from './components/PlantScreen';
-import ResultScreen from './components/ResultScreen';
+//import ResultScreen from './components/ResultScreen';
+import GenusScreen from './components/SearchScreen';
+import EffectScreen from './components/SearchScreen';
 
 // StatusBar style= A string, either: 'auto', 'inverted', 'light', or 'dark'.
 
@@ -36,7 +38,8 @@ export default function App() {
           <Stack.Screen name="home" component={HomeScreen} />
           <Stack.Screen name="search" component={SearchScreen} />
           <Stack.Screen name="plant" component={PlantScreen} />
-          <Stack.Screen name="result" component={ResultScreen} />
+          <Stack.Screen name="genus" component={GenusScreen} />
+          <Stack.Screen name="effect" component={EffectScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

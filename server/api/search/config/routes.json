@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/simple-search",
+      "handler": "search.simpleSearch",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/advanced-search",
+      "handler": "search.advancedSearch",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/auto-suggest",
+      "handler": "search.autoSuggest",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
