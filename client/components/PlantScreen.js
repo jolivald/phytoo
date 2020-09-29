@@ -20,7 +20,7 @@ const PlantScreen = props => {
   // TODO externalize species ???
   return (<ScreenWrapper {...props}>
     {plantInfo && (<>
-      <ScreenTitle label={`${plantInfo.genus.name} ${plantInfo.species}`} />
+      <ScreenTitle label={`${plantInfo.genus.name} ${plantInfo.species.name}`} />
       <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Noms communs</Text>
       <View style={{
           flexDirection: 'row',

@@ -1,28 +1,34 @@
 'use strict';
 
-const sanitizeQuery = str => str.trim()
+const sanitizeQuery = (str='') => str
+  .trim()
   .replace(/^[\s|&|\(|\)|:|\*|!]/, '')
   .replace(/[\s|&|\(|\)|:|\*|!]$/, '')
   .trim()
   .replace(/\s*[\s|&|\(|\)|:|\*|!]\s*/g, '|')
   .replace(/\|+/g, '|');
 
-module.exports = {
+const searchController = {
 
   simpleSearch: async (ctx, next) => {
-    let params = sanitizeQuery(ctx.request.body.query);
+    console.log('ctx', ctx.request.body, typeof ctx.request.body);
+    const { query } = JSON.parse(ctx.request.body);
+    //const { query } = ctx.request.body;
+    const params = sanitizeQuery(query);
+    console.log('params', params);
     const results = await strapi
       .query('plant')
       .model.query(async qb => {
         try {
           return await qb
             .whereRaw("to_tsvector('french', description) @@ to_tsquery('french', ?)", params)
-            .select('genus', 'species', 'description');
+            .select('id', 'genus', 'species', 'description');
         } catch {
           return { error: 'Les paramètres de recherche sont invalides'};
         }
       })
       .fetchAll();
+    console.log('results', results.toJSON());
     return JSON.stringify(results);
   }, 
 
@@ -40,6 +46,8 @@ module.exports = {
   },
 
   autoSuggest: async (ctx, next) => {
-    return this.simpleSearch(ctx, next);
+    return searchController.simpleSearch(ctx, next);
   }
 };
+
+module.exports = searchController;

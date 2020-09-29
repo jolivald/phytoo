@@ -35,6 +35,10 @@
       "collection": "effect",
       "via": "plants",
       "dominant": true
+    },
+    "images": {
+      "via": "plant",
+      "collection": "image"
     }
   }
 }

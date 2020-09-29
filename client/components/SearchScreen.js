@@ -20,12 +20,15 @@ const SearchScreen = props => {
   const handleSubmitSearch = () => {
     setSearchLoading(true);
     setSearchResults([]);
-    apiFetch('search', {
+    apiFetch('auto-suggest', {
+    //apiFetch('simple-search', {
       method: 'POST',
+      //body: { query: searchValue }
       body: JSON.stringify({ query: searchValue })
     })
       .then(response => response.json())
       .then(results => {
+        console.log('results', results);
         setSearchResults(results);
         setSearchLoading(false);
       });
@@ -43,7 +46,7 @@ const SearchScreen = props => {
       ? searchResults.map(({ id, genus, species, excerpt}) => (
         <List.Item
           key={id}
-          title={genus + ' ' + species}
+          title={genus.name + ' ' + species.name}
           description={excerpt}
           left={props => (<List.Icon {...props} icon="leaf" />)}
           onPress={() => props.navigation.navigate('plant', { id })}
