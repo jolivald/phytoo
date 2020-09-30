@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { AppRegistry } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
@@ -23,22 +23,34 @@ const customTheme = {
 };
 
 const Stack = createStackNavigator();
+const initialState = {
+
+};
+const reducerState = (state, action) => {
+  switch (action.type){
+    case 'search':
+      console.log('search!');
+      break;
+  }
+  return state;
+};
 
 export default function App() {
+  const [state, dispatch] = useReducer(reducerState, initialState);
   return (<>
     <PaperProvider theme={customTheme}>
       <NavigationContainer>
         <Stack.Navigator
           headerMode="screen"
           screenOptions={{
-            header: props => (<TopBar {...props} />)
+            header: props => (<TopBar { ...props} />)
           }}
         >
-          <Stack.Screen name="home" component={HomeScreen} />
-          <Stack.Screen name="search" component={SearchScreen} />
-          <Stack.Screen name="plant" component={PlantScreen} />
-          <Stack.Screen name="genus" component={GenusScreen} />
-          <Stack.Screen name="effect" component={EffectScreen} />
+          <Stack.Screen name="home" component={HomeScreen} initialParams={{ dispatch }} />
+          <Stack.Screen name="search" component={SearchScreen} initialParams={{ dispatch }} />
+          <Stack.Screen name="plant" component={PlantScreen} initialParams={{ dispatch }} />
+          <Stack.Screen name="genus" component={GenusScreen} initialParams={{ dispatch }} />
+          <Stack.Screen name="effect" component={EffectScreen} initialParams={{ dispatch }} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

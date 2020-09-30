@@ -3,8 +3,12 @@ import { View } from 'react-native';
 import { FAB } from 'react-native-paper';
 // import { LinearGradient } from 'expo'; // TODO
 
-const ScreenWrapper = ({ navigation, children }) => {
+const ScreenWrapper = ({ navigation, dispatch, children }) => {
+  const route = useNavigationState(({ index, routeNames }) => routeNames[index]);
   const handlePress = event => {
+    if (route === 'search'){
+      dispatch({ type: 'search', payload: 'TODO get search text'})
+    }
     navigation.navigate('search');
   };
   return (
