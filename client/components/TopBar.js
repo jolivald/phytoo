@@ -1,13 +1,16 @@
+import { useNavigationState } from '@react-navigation/native';
 import React from 'react';
 import { Platform } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import logo from '../assets/logo-white_32.png'; 
 
 const TopBar = ({ navigation }) => {
+  const route = useNavigationState(({ index, routeNames }) => routeNames[index]);
   const handlePressLogo = () => {
     navigation.navigate('home');
     // navigation.goBack();
   };
+  console.log('current screen', route);
   return (
     <Appbar style={{
       flexDirection: 'row',

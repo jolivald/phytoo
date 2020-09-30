@@ -9,9 +9,8 @@ import TopBar from './components/TopBar';
 import HomeScreen from './components/HomeScreen';
 import SearchScreen from './components/SearchScreen';
 import PlantScreen from './components/PlantScreen';
-//import ResultScreen from './components/ResultScreen';
-import GenusScreen from './components/SearchScreen';
-import EffectScreen from './components/SearchScreen';
+import GenusScreen from './components/GenusScreen';
+import EffectScreen from './components/EffectScreen';
 
 // StatusBar style= A string, either: 'auto', 'inverted', 'light', or 'dark'.
 

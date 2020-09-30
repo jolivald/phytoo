@@ -7,7 +7,6 @@ import ScreenWrapper from './ScreenWrapper';
 
 const PlantScreen = props => {
   const { id } = props.route.params;
-  //const [plantId, setPlantId] = useState(id);
   const [plantInfo, setPlantInfo] = useState(null);
   useEffect(() => {
     apiFetch(`plants/${id}`)
@@ -17,10 +16,12 @@ const PlantScreen = props => {
       })
   }, []);
   console.log('plant info', plantInfo);
-  // TODO externalize species ???
   return (<ScreenWrapper {...props}>
     {plantInfo && (<>
-      <ScreenTitle label={`${plantInfo.genus.name} ${plantInfo.species.name}`} />
+      <ScreenTitle
+        label={`${plantInfo.genus.name} ${plantInfo.species.name}`}
+        onPress={() => props.navigation.navigate('genus', { id: plantInfo.genus.id }) }
+      />
       <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Noms communs</Text>
       <View style={{
           flexDirection: 'row',

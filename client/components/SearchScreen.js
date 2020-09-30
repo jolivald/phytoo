@@ -23,7 +23,6 @@ const SearchScreen = props => {
     apiFetch('auto-suggest', {
     //apiFetch('simple-search', {
       method: 'POST',
-      //body: { query: searchValue }
       body: JSON.stringify({ query: searchValue })
     })
       .then(response => response.json())
