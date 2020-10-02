@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text } from 'react-native';
 import { Searchbar, ActivityIndicator, List } from 'react-native-paper';
+import removeMD from 'remove-markdown';
 import ScreenWrapper from './ScreenWrapper';
 import ScreenTitle from './ScreenTitle';
 import { apiFetch } from '../utils';
@@ -15,11 +16,12 @@ const SearchScreen = props => {
       setSearchResults([]);
       return;
     }
-    handleSubmitSearch(value);
+    handleSubmitSearch(null, value);
   };
-  const handleSubmitSearch = (value) => {
+  const handleSubmitSearch = (event, value) => {
     setSearchLoading(true);
     setSearchResults([]);
+    console.log('auto-suggest', value, searchValue)
     apiFetch('auto-suggest', {
       method: 'POST',
       body: JSON.stringify({ query: value || searchValue })
@@ -40,11 +42,11 @@ const SearchScreen = props => {
         onIconPress={handleSubmitSearch}
       />
     {searchResults.length > 0
-      ? searchResults.map(({ id, genus, species, excerpt}) => (
+      ? searchResults.map(({ id, genus, species, description}) => (
         <List.Item
           key={id}
           title={genus.name + ' ' + species.name}
-          description={excerpt}
+          description={removeMD(description)}
           left={props => (<List.Icon {...props} icon="leaf" />)}
           onPress={() => props.navigation.navigate('plant', { id })}
         />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, ActivityIndicator, List } from 'react-native-paper';
 import Markdown from 'react-native-markdown-renderer';
+import removeMD from 'remove-markdown';
 import { apiFetch } from '../utils';
 import ScreenWrapper from './ScreenWrapper';
 import ScreenTitle from './ScreenTitle';
@@ -22,8 +23,8 @@ const VernacularScreen = props => {
         {vernacularInfo.plants.map(plant => (
           <List.Item
             key={plant.id}
-            title={'TODO GET genus + species'}
-            description={'plant excerpt here'}
+            title={`${plant.genus.name} ${plant.species.name}`}
+            description={removeMD(plant.description)}
             left={props => (<List.Icon {...props} icon="leaf" />)}
             onPress={() => props.navigation.navigate('plant', { id: plant.id })}
           />
