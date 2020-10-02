@@ -16,13 +16,25 @@ const SearchScreen = props => {
       setSearchResults([]);
       return;
     }
-    handleSubmitSearch(null, value);
+    handleAutoSuggest(value);
+  };
+  const handleAutoSuggest = value => {
+    setSearchLoading(true);
+    setSearchResults([]);
+    apiFetch('auto-suggest', {
+      method: 'POST',
+      body: JSON.stringify({ query: value || searchValue })
+    })
+      .then(response => response.json())
+      .then(results => { 
+        setSearchResults(results);
+        setSearchLoading(false);
+      });
   };
   const handleSubmitSearch = (event, value) => {
     setSearchLoading(true);
     setSearchResults([]);
-    console.log('auto-suggest', value, searchValue)
-    apiFetch('auto-suggest', {
+    apiFetch('simple-search', {
       method: 'POST',
       body: JSON.stringify({ query: value || searchValue })
     })

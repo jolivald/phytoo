@@ -25,6 +25,8 @@ const customTheme = {
 
 const Stack = createStackNavigator();
 
+console.disableYellowBox = true;
+
 export default function App() {
   return (<>
     <PaperProvider theme={customTheme}>

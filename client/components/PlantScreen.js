@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import { Chip, Text, List } from 'react-native-paper';
 import Markdown from 'react-native-markdown-renderer';
 import { apiFetch } from '../utils';
 import ScreenTitle from './ScreenTitle';
 import ScreenWrapper from './ScreenWrapper';
+
+//  
 
 const PlantScreen = props => {
   const { id } = props.route.params;
@@ -14,6 +16,7 @@ const PlantScreen = props => {
       .then(response => response.json())
       .then(plant => {
         setPlantInfo(plant);
+        console.log('plant', plant.images[0].image[0].url);
       })
   }, []);
   return (<ScreenWrapper {...props}>
@@ -22,6 +25,7 @@ const PlantScreen = props => {
         label={`${plantInfo.genus.name} ${plantInfo.species.name}`}
         onPress={() => props.navigation.navigate('genus', { id: plantInfo.genus.id }) }
       />
+
       <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Noms communs</Text>
       <View style={{
           flexDirection: 'row',
@@ -38,8 +42,12 @@ const PlantScreen = props => {
           </Chip>
         ))}
       </View>
+
+      <Image source={{ uri: `http://localhost:1337/${plantInfo.images[0].image[0].url}` }} />
+
       <Text style={{ fontWeight: 'bold', marginBottom: 0 }}>Description</Text>
       <Markdown>{plantInfo.description}</Markdown>
+
       <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Effets thérapeutiques</Text>
       {plantInfo.effects.map(effect => (
         <List.Item
@@ -50,6 +58,9 @@ const PlantScreen = props => {
           onPress={() => props.navigation.navigate('effect', { id: effect.id })}
         />
       ))}
+
+      <Text style={{ fontWeight: 'bold', marginTop: 10 }}>Source</Text>
+      <Markdown>{plantInfo.source}</Markdown>
     </>)}
   </ScreenWrapper>)
 };

@@ -11,8 +11,9 @@ const sanitizeQuery = (str='') => str
 const searchController = {
 
   simpleSearch: async (ctx, next) => {
-    console.log('ctx', ctx.request.body, typeof ctx.request.body);
-    const { query } = JSON.parse(ctx.request.body);
+    //console.log('ctx', ctx.request.body, typeof ctx.request.body);
+    //const { query } = JSON.parse(ctx.request.body);
+    const { query } = ctx.request.body;
     //const { query } = ctx.request.body;
     const params = sanitizeQuery(query);
     //console.log('params', params);
@@ -28,17 +29,18 @@ const searchController = {
         }
       })
       .fetchAll();
-    console.log('results', results.toJSON());
+    //console.log('results', results.toJSON());
     return JSON.stringify(results);
   }, 
 
   advancedSearch: async (ctx, next) => {
     const { query } = ctx.request.body;
+    const params = sanitizeQuery(query);
     const results = await strapi
       .query('plant')
       .model.query(async qb => {
         return await qb
-          .whereRaw('to_tsvector(description) @@ to_tsquery(?)', query)
+          .whereRaw('to_tsvector(description) @@ to_tsquery(?)', params)
           .select('id', 'genus', 'species', 'description');
       })
       .fetchAll();
@@ -46,7 +48,9 @@ const searchController = {
   },
 
   autoSuggest: async (ctx, next) => {
-    const { query } = JSON.parse(ctx.request.body);
+   // console.log('auto-suggest', typeof ctx.request.body);
+    //const { query } = JSON.parse(ctx.request.body);
+    const { query } = ctx.request.body;
     const results = await strapi
       .query('plant')
       .model.query(async qb => {
