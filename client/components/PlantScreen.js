@@ -15,7 +15,6 @@ const PlantScreen = props => {
         setPlantInfo(plant);
       })
   }, []);
-  console.log('plant info', plantInfo);
   return (<ScreenWrapper {...props}>
     {plantInfo && (<>
       <ScreenTitle
