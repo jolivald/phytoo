@@ -23,20 +23,8 @@ const customTheme = {
 };
 
 const Stack = createStackNavigator();
-const initialState = {
-
-};
-const reducerState = (state, action) => {
-  switch (action.type){
-    case 'search':
-      console.log('search!');
-      break;
-  }
-  return state;
-};
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducerState, initialState);
   return (<>
     <PaperProvider theme={customTheme}>
       <NavigationContainer>
@@ -46,11 +34,11 @@ export default function App() {
             header: props => (<TopBar { ...props} />)
           }}
         >
-          <Stack.Screen name="home" component={HomeScreen} initialParams={{ dispatch }} />
-          <Stack.Screen name="search" component={SearchScreen} initialParams={{ dispatch }} />
-          <Stack.Screen name="plant" component={PlantScreen} initialParams={{ dispatch }} />
-          <Stack.Screen name="genus" component={GenusScreen} initialParams={{ dispatch }} />
-          <Stack.Screen name="effect" component={EffectScreen} initialParams={{ dispatch }} />
+          <Stack.Screen name="home" component={HomeScreen} />
+          <Stack.Screen name="search" component={SearchScreen} />
+          <Stack.Screen name="plant" component={PlantScreen} />
+          <Stack.Screen name="genus" component={GenusScreen} />
+          <Stack.Screen name="effect" component={EffectScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
