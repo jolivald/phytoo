@@ -18,7 +18,6 @@ const SearchScreen = props => {
     handleSubmitSearch(value);
   };
   const handleSubmitSearch = (value) => {
-    console.log('handle submit :)');
     setSearchLoading(true);
     setSearchResults([]);
     apiFetch('auto-suggest', {
@@ -27,7 +26,6 @@ const SearchScreen = props => {
     })
       .then(response => response.json())
       .then(results => {
-        console.log('results', results);
         setSearchResults(results);
         setSearchLoading(false);
       });

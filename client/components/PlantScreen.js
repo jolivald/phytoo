@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Chip, Text, List } from 'react-native-paper';
+import Markdown from 'react-native-markdown-renderer';
 import { apiFetch } from '../utils';
 import ScreenTitle from './ScreenTitle';
 import ScreenWrapper from './ScreenWrapper';
@@ -28,15 +29,17 @@ const PlantScreen = props => {
           marginBottom: 10
         }}>
         {plantInfo.vernaculars.map(verna => (
-          <Chip key={verna.id} style={{ marginRight: 5, marginBottom: 5, backgroundColor: '#7dd52f' }}>
+          <Chip
+            key={verna.id}
+            style={{ marginRight: 5, marginBottom: 5, backgroundColor: '#7dd52f' }}
+            onPress={() => props.navigation.navigate('vernacular', { id: verna.id })}
+          >
             {verna.name}
           </Chip>
         ))}
       </View>
-      <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Description</Text>
-      <Text style={{ marginBottom: 20 }}>
-        {plantInfo.description}
-      </Text>
+      <Text style={{ fontWeight: 'bold', marginBottom: 0 }}>Description</Text>
+      <Markdown>{plantInfo.description}</Markdown>
       <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Effets thérapeutiques</Text>
       {plantInfo.effects.map(effect => (
         <List.Item

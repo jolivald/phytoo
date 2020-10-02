@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, ActivityIndicator } from 'react-native-paper';
+import Markdown from 'react-native-markdown-renderer';
 import { apiFetch } from '../utils';
 import ScreenWrapper from './ScreenWrapper';
 import ScreenTitle from './ScreenTitle';
@@ -15,9 +16,9 @@ const GenusScreen = props => {
       })
   }, []);
   return genusInfo
-    ? (<ScreenWrapper {...props}>
+    ? (<ScreenWrapper {...props} style={{ marginBottom: 0 }}>
         <ScreenTitle label={genusInfo.name} />
-        <Text>{genusInfo.description}</Text>
+        <Markdown>{genusInfo.description}</Markdown>
       </ScreenWrapper>)
     : (<ActivityIndicator
         animating={true}
