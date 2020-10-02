@@ -15,24 +15,22 @@ const SearchScreen = props => {
       setSearchResults([]);
       return;
     }
-    handleSubmitSearch();
+    handleSubmitSearch(value);
   };
-  const handleSubmitSearch = () => {
+  const handleSubmitSearch = (value) => {
     setSearchLoading(true);
     setSearchResults([]);
     apiFetch('auto-suggest', {
-    //apiFetch('simple-search', {
       method: 'POST',
-      body: JSON.stringify({ query: searchValue })
+      body: JSON.stringify({ query: value || searchValue })
     })
       .then(response => response.json())
       .then(results => {
-        console.log('results', results);
         setSearchResults(results);
         setSearchLoading(false);
       });
   };
-  return (<ScreenWrapper {...props}>
+  return (<ScreenWrapper {...props} onFABPress={handleSubmitSearch}>
     <ScreenTitle label="Rechercher" />
     <Searchbar
         value={searchValue}

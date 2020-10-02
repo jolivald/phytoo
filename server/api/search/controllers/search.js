@@ -15,7 +15,7 @@ const searchController = {
     const { query } = JSON.parse(ctx.request.body);
     //const { query } = ctx.request.body;
     const params = sanitizeQuery(query);
-    console.log('params', params);
+    //console.log('params', params);
     const results = await strapi
       .query('plant')
       .model.query(async qb => {
@@ -39,14 +39,28 @@ const searchController = {
       .model.query(async qb => {
         return await qb
           .whereRaw('to_tsvector(description) @@ to_tsquery(?)', query)
-          .select('genus', 'species', 'description');
+          .select('id', 'genus', 'species', 'description');
       })
       .fetchAll();
     return JSON.stringify(results);
   },
 
   autoSuggest: async (ctx, next) => {
-    return searchController.simpleSearch(ctx, next);
+    const { query } = JSON.parse(ctx.request.body);
+    const results = await strapi
+      .query('plant')
+      .model.query(async qb => {
+        try {
+          return await qb
+            .where('description', 'LIKE', `%${query}%`)
+            .select('id', 'genus', 'species', 'description');
+        } catch {
+          return { error: 'Les paramètres de recherche sont invalides'};
+        }
+      })
+      .fetchAll();
+    console.log('results', results.toJSON());
+    return JSON.stringify(results);
   }
 };
 
