@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 import { Text, ActivityIndicator } from 'react-native-paper';
 import Markdown from 'react-native-markdown-renderer';
 import { apiFetch } from '../utils';
@@ -19,14 +19,22 @@ const ImageScreen = props => {
   return imageInfo
     ? (<ScreenWrapper {...props} style={{ marginBottom: 0 }}>
         <ScreenTitle label={imageInfo.name} />
-        <Image
-          source={{ uri: `http://localhost:1337${imageInfo.image[0].url}` }}
+        <View
           style={{
-            height: 200,
-            width: 200,
-            resizeMode: 'cover'
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
           }}
-        />
+        >
+          <Image
+            source={{ uri: `http://localhost:1337${imageInfo.image[0].url}` }}
+            style={{
+              height: 200,
+              width: 200,
+              resizeMode: 'cover'
+            }}
+          />
+        </View>
         <Markdown>{imageInfo.description}</Markdown>
       </ScreenWrapper>)
     : (<ActivityIndicator

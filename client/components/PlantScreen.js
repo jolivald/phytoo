@@ -47,7 +47,14 @@ const PlantScreen = props => {
         ))}
       </View>
 
-      <TouchableOpacity onPress={handleImagePress}>
+      <TouchableOpacity
+        onPress={handleImagePress}
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
         <Image
           source={{ uri: `http://localhost:1337${plantInfo.images[0].image[0].url}` }}
           style={{
