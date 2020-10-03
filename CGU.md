@@ -5,7 +5,7 @@
 
 Les présentes conditions générales d'utilisation sont conclues entre :
  - le gérant de l'application, ci après désigné l'Editeur,
- - toute persone souhaitant accéder au site et à ses services, ci-après appelé l'Utilisateur.
+ - toute persone souhaitant accéder à l'application et à ses services, ci-après appelé l'Utilisateur.
 
 
 # Article 1 - Principes
@@ -132,4 +132,3 @@ En application de la réglementation applicable aux données à cractère person
 
  Les présentes conditions générales d'utilisation sont soumises à l'application du droit français.  
  Si les parties n'arrivent pas à résoudre un litige à l'amiable, le litige sera soumis à la compétence des tribunaux français.
- 
