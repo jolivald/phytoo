@@ -5,6 +5,7 @@ import Markdown from 'react-native-markdown-renderer';
 import { apiFetch } from '../utils';
 import ScreenTitle from './ScreenTitle';
 import ScreenWrapper from './ScreenWrapper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 //  
 
@@ -16,9 +17,12 @@ const PlantScreen = props => {
       .then(response => response.json())
       .then(plant => {
         setPlantInfo(plant);
-        console.log('plant', plant.images[0].image[0].url);
+        // console.log('plant', plant.images[0]); //.image[0].url);
       })
   }, []);
+  const handleImagePress = () => {
+    props.navigation.navigate('image', { id: plantInfo.images[0].id });
+  };
   return (<ScreenWrapper {...props}>
     {plantInfo && (<>
       <ScreenTitle
@@ -43,7 +47,17 @@ const PlantScreen = props => {
         ))}
       </View>
 
-      <Image source={{ uri: `http://localhost:1337/${plantInfo.images[0].image[0].url}` }} />
+      <TouchableOpacity onPress={handleImagePress}>
+        <Image
+          source={{ uri: `http://localhost:1337${plantInfo.images[0].image[0].url}` }}
+          style={{
+            height: 200,
+            width: 200,
+            resizeMode: 'cover',
+            marginBottom: 10
+          }}
+        />
+      </TouchableOpacity>
 
       <Text style={{ fontWeight: 'bold', marginBottom: 0 }}>Description</Text>
       <Markdown>{plantInfo.description}</Markdown>
