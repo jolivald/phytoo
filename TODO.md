@@ -1,3 +1,3 @@
 # TODO
 
-display image on PlantScreen
+fix image on PlantScreen (mobile verion)
