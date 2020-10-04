@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Text } from 'react-native';
-import { Searchbar, ActivityIndicator, List, Checkbox, Button, RadioButton } from 'react-native-paper';
+import {
+  Searchbar, ActivityIndicator, List, Button, RadioButton, Snackbar
+} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import removeMD from 'remove-markdown';
 import ScreenWrapper from './ScreenWrapper';
 import ScreenTitle from './ScreenTitle';
@@ -12,6 +15,7 @@ const SearchScreen = props => {
   const [searchLoading, setSearchLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [radioChecked, setRadioChecked] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const handleChangeSearch = value => {
     setSearchValue(value);
     if (value.length < 3){
@@ -34,15 +38,18 @@ const SearchScreen = props => {
         setSearchLoading(false);
       });
   };
-  const handleSubmitSearch = (event, value) => {
+  const handleSubmitSearch = (event, value=searchValue) => {
     if (expanded){
       return handleAdvancedSearch(null, value);
+    }
+    if (value.length < 3){
+      return setErrorMessage('Entrez au moins trois caractères pour lancer une recherche');
     }
     setSearchLoading(true);
     setSearchResults([]);
     apiFetch('simple-search', {
       method: 'POST',
-      body: JSON.stringify({ query: value || searchValue })
+      body: JSON.stringify({ query: value })
     })
       .then(response => response.json())
       .then(results => {
@@ -50,9 +57,12 @@ const SearchScreen = props => {
         setSearchLoading(false);
       });
   };
-  const handleAdvancedSearch = (event, value) => {
+  const handleAdvancedSearch = (event, value=searchValue) => {
+    if (value.length < 3){
+      return setErrorMessage('Entrez au moins trois caractères pour lancer une recherche');
+    }
     const request = {
-      query: value || searchValue,
+      query: value,
       model: radioChecked
     };
     apiFetch('advanced-search', {
@@ -77,8 +87,23 @@ const SearchScreen = props => {
       onChangeText={handleChangeSearch}
       onIconPress={handleSubmitSearch}
     />
+    <Snackbar
+      visible={!!errorMessage}
+      onDismiss={() => setErrorMessage(null)}
+      action={{
+        label: <Icon name="close" size={20} color="#ffffff" />,
+        onPress: () => setErrorMessage(null),
+      }}
+      style={{ backgroundColor: '#008900' }}
+      wrapperStyle={{
+        position: 'absolute',
+        top: 0
+      }}
+    >
+      Entrez au moins trois caractères à rechercher
+    </Snackbar>
     <List.Accordion
-      title={ expanded ? 'Rechercher parmi:' : 'Recherche avancée'}
+      title={ expanded ? 'Filtrer par:' : 'Filtrer'}
       expanded={expanded}
       onPress={() => setExpanded(!expanded)}
     >
@@ -109,7 +134,7 @@ const SearchScreen = props => {
               size="large"
               style={{ marginTop: 20 }}
             />)
-          : (<List.Item
+          : (expanded || <List.Item
               title="Vous cherchez quelque chose?"
               description="Entrez dans le champs ci-dessus les termes à rechercher."
               left={props => (<List.Icon {...props} icon="help" />)}
