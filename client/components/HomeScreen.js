@@ -41,7 +41,7 @@ const HomeScreen = props => {
         >
       <Image source={logo} style={{ height: 150, width: 150 }} />
     </View>
-
+    <Text style={{ marginBottom: 10 }}>Les informations présentées par cette application sont fournies à titre informatif et ne saurait se substituer à un avis médical.</Text>
     <Text>En continuant à utiliser cette application vous déclarez accepter ses conditions générales d'utilisation.</Text>
     
     <Button

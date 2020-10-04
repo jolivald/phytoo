@@ -18,7 +18,6 @@ const PlantScreen = props => {
       .then(response => response.json())
       .then(plant => {
         setPlantInfo(plant);
-        console.log('===> image', plant.images[0].image[0].url);
         return fetch(`http://localhost:1337${plant.images[0].image[0].url}`)
           .then(response => response.blob())
           .then(blob => {

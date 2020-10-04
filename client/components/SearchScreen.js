@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Text } from 'react-native';
-import { Searchbar, ActivityIndicator, List, Checkbox, Button } from 'react-native-paper';
+import {
+  Searchbar, ActivityIndicator, List, Button, RadioButton, Snackbar
+} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import removeMD from 'remove-markdown';
 import ScreenWrapper from './ScreenWrapper';
 import ScreenTitle from './ScreenTitle';
@@ -11,10 +14,8 @@ const SearchScreen = props => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [vernacularChecked, setVernacularChecked] = useState(false);
-  const [genusChecked, setGenusChecked] = useState(false);
-  const [effectChecked, setEffectChecked] = useState(false);
-  const [imageChecked, setImageChecked] = useState(false);
+  const [radioChecked, setRadioChecked] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const handleChangeSearch = value => {
     setSearchValue(value);
     if (value.length < 3){
@@ -24,6 +25,7 @@ const SearchScreen = props => {
     handleAutoSuggest(value);
   };
   const handleAutoSuggest = value => {
+    if (expanded){ return; }
     setSearchLoading(true);
     setSearchResults([]);
     apiFetch('auto-suggest', {
@@ -36,12 +38,18 @@ const SearchScreen = props => {
         setSearchLoading(false);
       });
   };
-  const handleSubmitSearch = (event, value) => {
+  const handleSubmitSearch = (event, value=searchValue) => {
+    if (expanded){
+      return handleAdvancedSearch(null, value);
+    }
+    if (value.length < 3){
+      return setErrorMessage('Entrez au moins trois caractères pour lancer une recherche');
+    }
     setSearchLoading(true);
     setSearchResults([]);
     apiFetch('simple-search', {
       method: 'POST',
-      body: JSON.stringify({ query: value || searchValue })
+      body: JSON.stringify({ query: value })
     })
       .then(response => response.json())
       .then(results => {
@@ -49,16 +57,27 @@ const SearchScreen = props => {
         setSearchLoading(false);
       });
   };
-  const handleAdvancedSearch = (event, value) => {
-    const request = {
-      query: value || searchValue,
-      genus: genusChecked,
-      vernacular: vernacularChecked,
-      effect: effectChecked,
-      image: imageChecked
+  const handleAdvancedSearch = (event, value=searchValue) => {
+    if (value.length < 3){
+      return setErrorMessage('Entrez au moins trois caractères pour lancer une recherche');
     }
-    console.log('advanced search', request);
+    const request = {
+      query: value,
+      model: radioChecked
+    };
+    apiFetch('advanced-search', {
+      method: 'POST',
+      body: JSON.stringify(request)
+    })
+      .then(response => response.json())
+      .then(results => {
+        setSearchResults(results);
+        setSearchLoading(false);
+      });
   }
+  const handleRadioPress = value => {
+    setRadioChecked(value);
+  };
   return (<ScreenWrapper {...props} onFABPress={handleSubmitSearch}>
     <ScreenTitle label="Rechercher" />
     <Searchbar
@@ -68,35 +87,32 @@ const SearchScreen = props => {
       onChangeText={handleChangeSearch}
       onIconPress={handleSubmitSearch}
     />
+    <Snackbar
+      visible={!!errorMessage}
+      onDismiss={() => setErrorMessage(null)}
+      action={{
+        label: <Icon name="close" size={20} color="#ffffff" />,
+        onPress: () => setErrorMessage(null),
+      }}
+      style={{ backgroundColor: '#008900' }}
+      wrapperStyle={{
+        position: 'absolute',
+        top: 0
+      }}
+    >
+      Entrez au moins trois caractères à rechercher
+    </Snackbar>
     <List.Accordion
-      title={ expanded ? 'Rechercher parmi:' : 'Recherche avancée'}
+      title={ expanded ? 'Filtrer par:' : 'Filtrer'}
       expanded={expanded}
       onPress={() => setExpanded(!expanded)}
     >
-      <Checkbox.Item
-        label="Nom communs"
-        status={vernacularChecked ? 'checked' : 'unchecked'}
-        onPress={() => setVernacularChecked(!vernacularChecked)}
-        color="#008900"
-      />
-      <Checkbox.Item
-        label="Genres"
-        status={genusChecked ? 'checked' : 'unchecked'}
-        onPress={() => setGenusChecked(!genusChecked)}
-        color="#008900"
-      />
-      <Checkbox.Item
-        label="Effets"
-        status={effectChecked ? 'checked' : 'unchecked'}
-        onPress={() => setEffectChecked(!effectChecked)}
-        color="#008900"
-      />
-      <Checkbox.Item
-        label="Images"
-        status={imageChecked ? 'checked' : 'unchecked'}
-        onPress={() => setImageChecked(!imageChecked)}
-        color="#008900"
-      />
+      <RadioButton.Group onValueChange={handleRadioPress} value={radioChecked}>
+        <RadioButton.Item label="Nom communs" value="vernacular" color="#008900" />
+        <RadioButton.Item label="Genres" value="genus" color="#008900" />
+        <RadioButton.Item label="Effets" value="effect" color="#008900" />
+        <RadioButton.Item label="Images" value="image" color="#008900" />
+      </RadioButton.Group>
       <Button icon="magnify" mode="contained" onPress={handleAdvancedSearch}>
         Recherche avancée
       </Button>
@@ -118,7 +134,7 @@ const SearchScreen = props => {
               size="large"
               style={{ marginTop: 20 }}
             />)
-          : (<List.Item
+          : (expanded || <List.Item
               title="Vous cherchez quelque chose?"
               description="Entrez dans le champs ci-dessus les termes à rechercher."
               left={props => (<List.Icon {...props} icon="help" />)}
