@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text } from 'react-native';
-import { Searchbar, ActivityIndicator, List, Checkbox, Button } from 'react-native-paper';
+import { Searchbar, ActivityIndicator, List, Checkbox, Button, RadioButton } from 'react-native-paper';
 import removeMD from 'remove-markdown';
 import ScreenWrapper from './ScreenWrapper';
 import ScreenTitle from './ScreenTitle';
@@ -11,10 +11,7 @@ const SearchScreen = props => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [vernacularChecked, setVernacularChecked] = useState(false);
-  const [genusChecked, setGenusChecked] = useState(false);
-  const [effectChecked, setEffectChecked] = useState(false);
-  const [imageChecked, setImageChecked] = useState(false);
+  const [radioChecked, setRadioChecked] = useState(null);
   const handleChangeSearch = value => {
     setSearchValue(value);
     if (value.length < 3){
@@ -52,13 +49,23 @@ const SearchScreen = props => {
   const handleAdvancedSearch = (event, value) => {
     const request = {
       query: value || searchValue,
-      genus: genusChecked,
-      vernacular: vernacularChecked,
-      effect: effectChecked,
-      image: imageChecked
+      model: radioChecked
     }
     console.log('advanced search', request);
+    apiFetch('advanced-search', {
+      method: 'POST',
+      body: JSON.stringify(request)
+    })
+      .then(response => response.json())
+      .then(results => {
+        setSearchResults(results);
+        setSearchLoading(false);
+      });
   }
+  const handleRadioPress = value => {
+    console.log('radio', value);
+    setRadioChecked(value);
+  };
   return (<ScreenWrapper {...props} onFABPress={handleSubmitSearch}>
     <ScreenTitle label="Rechercher" />
     <Searchbar
@@ -73,30 +80,12 @@ const SearchScreen = props => {
       expanded={expanded}
       onPress={() => setExpanded(!expanded)}
     >
-      <Checkbox.Item
-        label="Nom communs"
-        status={vernacularChecked ? 'checked' : 'unchecked'}
-        onPress={() => setVernacularChecked(!vernacularChecked)}
-        color="#008900"
-      />
-      <Checkbox.Item
-        label="Genres"
-        status={genusChecked ? 'checked' : 'unchecked'}
-        onPress={() => setGenusChecked(!genusChecked)}
-        color="#008900"
-      />
-      <Checkbox.Item
-        label="Effets"
-        status={effectChecked ? 'checked' : 'unchecked'}
-        onPress={() => setEffectChecked(!effectChecked)}
-        color="#008900"
-      />
-      <Checkbox.Item
-        label="Images"
-        status={imageChecked ? 'checked' : 'unchecked'}
-        onPress={() => setImageChecked(!imageChecked)}
-        color="#008900"
-      />
+      <RadioButton.Group onValueChange={handleRadioPress} value={radioChecked}>
+        <RadioButton.Item label="Nom communs" value="vernacular" color="#008900" />
+        <RadioButton.Item label="Genres" value="genus" color="#008900" />
+        <RadioButton.Item label="Effets" value="effect" color="#008900" />
+        <RadioButton.Item label="Images" value="image" color="#008900" />
+      </RadioButton.Group>
       <Button icon="magnify" mode="contained" onPress={handleAdvancedSearch}>
         Recherche avancée
       </Button>

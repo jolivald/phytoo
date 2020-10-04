@@ -8,7 +8,6 @@ const { sanitizeEntity } = require('strapi-utils');
 
 module.exports = {
   findOne: async ctx => {
-    console.log('genus findOne', typeof ctx);
     const { id } = ctx.params;
     const entity = await strapi.services.genus.findOne(
       { id },
