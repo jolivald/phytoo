@@ -51,7 +51,7 @@ const SearchScreen = props => {
   };
   const handleAdvancedSearch = (event, value) => {
     const request = {
-      query: searchValue || value,
+      query: value || searchValue,
       genus: genusChecked,
       vernacular: vernacularChecked,
       effect: effectChecked,

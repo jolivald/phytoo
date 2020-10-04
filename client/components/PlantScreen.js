@@ -7,18 +7,30 @@ import ScreenTitle from './ScreenTitle';
 import ScreenWrapper from './ScreenWrapper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-//  
+// source={{ uri: `http://localhost:1337${plantInfo.images[0].image[0].url}` }}
 
 const PlantScreen = props => {
   const { id } = props.route.params;
   const [plantInfo, setPlantInfo] = useState(null);
+  const [plantImage, setPlantImage] = useState(null);
   useEffect(() => {
     apiFetch(`plants/${id}`)
       .then(response => response.json())
       .then(plant => {
         setPlantInfo(plant);
-        // console.log('plant', plant.images[0]); //.image[0].url);
-      })
+        console.log('===> image', plant.images[0].image[0].url);
+        return fetch(`http://localhost:1337${plant.images[0].image[0].url}`)
+          .then(response => response.blob())
+          .then(blob => {
+            const reader = new FileReader();
+            reader.readAsDataURL(blob); 
+            reader.onloadend = () => {
+              console.log('===> reader', reader.result);
+              console.log( reader.result.substr(reader.result.indexOf(',')+1) );
+              setPlantImage(reader.result);
+            };
+          });
+      });
   }, []);
   const handleImagePress = () => {
     props.navigation.navigate('image', { id: plantInfo.images[0].id });
@@ -56,7 +68,8 @@ const PlantScreen = props => {
         }}
       >
         <Image
-          source={{ uri: `http://localhost:1337${plantInfo.images[0].image[0].url}` }}
+          source={{ uri: plantImage }}
+          defaultSource={{ uri: 'https://via.placeholder.com/200' }}
           style={{
             height: 200,
             width: 200,

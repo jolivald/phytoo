@@ -13,8 +13,7 @@ import GenusScreen from './components/GenusScreen';
 import EffectScreen from './components/EffectScreen';
 import VernacularScreen from './components/VernacularScreen';
 import ImageScreen from './components/ImageScreen';
-
-// StatusBar style= A string, either: 'auto', 'inverted', 'light', or 'dark'.
+import CguScreen from './components/CguScreen';
 
 const customTheme = {
   ...DefaultTheme,
@@ -45,6 +44,7 @@ export default function App() {
           <Stack.Screen name="effect" component={EffectScreen} />
           <Stack.Screen name="vernacular" component={VernacularScreen} />
           <Stack.Screen name="image" component={ImageScreen} />
+          <Stack.Screen name="cgu" component={CguScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
