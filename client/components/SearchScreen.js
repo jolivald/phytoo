@@ -21,6 +21,7 @@ const SearchScreen = props => {
     handleAutoSuggest(value);
   };
   const handleAutoSuggest = value => {
+    if (expanded){ return; }
     setSearchLoading(true);
     setSearchResults([]);
     apiFetch('auto-suggest', {
@@ -34,6 +35,9 @@ const SearchScreen = props => {
       });
   };
   const handleSubmitSearch = (event, value) => {
+    if (expanded){
+      return handleAdvancedSearch(null, value);
+    }
     setSearchLoading(true);
     setSearchResults([]);
     apiFetch('simple-search', {
@@ -50,8 +54,7 @@ const SearchScreen = props => {
     const request = {
       query: value || searchValue,
       model: radioChecked
-    }
-    console.log('advanced search', request);
+    };
     apiFetch('advanced-search', {
       method: 'POST',
       body: JSON.stringify(request)
@@ -63,7 +66,6 @@ const SearchScreen = props => {
       });
   }
   const handleRadioPress = value => {
-    console.log('radio', value);
     setRadioChecked(value);
   };
   return (<ScreenWrapper {...props} onFABPress={handleSubmitSearch}>

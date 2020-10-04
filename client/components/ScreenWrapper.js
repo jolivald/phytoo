@@ -8,7 +8,7 @@ const ScreenWrapper = ({ navigation, children, onFABPress }) => {
     navigation.navigate('search'); 
   });
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingBottom: 70 }}>
       <ScrollView style={{ flex: 1}}>
         <View style={{ flex: 1, margin: 20 }}>
           {children}

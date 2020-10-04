@@ -30,6 +30,10 @@ const searchController = {
 
   advancedSearch: async (ctx, next) => {
     const { model, query } = ctx.request.body;
+    const allowedModels = ['vernacular', 'genus', 'effect', 'image'];
+    if (!allowedModels.includes(model)){
+      throw new Error('Invalid model request');
+    }
     const results = await strapi
       .query(model)
       .search({ _q: query }, ['plants', 'plants.genus', 'plants.species']);
