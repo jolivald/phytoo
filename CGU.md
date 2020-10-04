@@ -30,10 +30,10 @@ Les présentes conditions générales d'utilisation sont conclues pour une duré
 # Article 3 - Accès à l'application
 
 Tout utilisateur ayant accès à internet peut accéder gratuitement et depuis n'importe où à l'application Phytoo. Les frais supportés par l'Utilisateur pour y accéder (connexion internet, matériel informatique, etc.) ne sont pas à la charge de l'Editeur.  
-L'apllication et ses différents services peuvent être interrompus ou suspendus par l'Editeur, notamment à l'occasion d'une mantenance, sans obligation de préavis ou de justification.  
-L'Utilisateur de l'application a accès aux service suivants :
- - TODO
- - TODO
+L'application et ses différents services peuvent être interrompus ou suspendus par l'Editeur, notamment à l'occasion d'une maintenance, sans obligation de préavis ou de justification.  
+L'Utilisateur de l'application a accès aux services suivants :
+ - consulter le répertoire des plantes ;
+ - effectuer une recherche dans le répertoire des plantes.
 
 
 # Article 4 - Responsabilités
