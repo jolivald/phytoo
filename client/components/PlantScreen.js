@@ -23,12 +23,8 @@ const PlantScreen = props => {
           .then(response => response.blob())
           .then(blob => {
             const reader = new FileReader();
-            reader.readAsDataURL(blob); 
-            reader.onloadend = () => {
-              console.log('===> reader', reader.result);
-              console.log( reader.result.substr(reader.result.indexOf(',')+1) );
-              setPlantImage(reader.result);
-            };
+            reader.onloadend = () => setPlantImage(reader.result);
+            reader.readAsDataURL(blob);
           });
       });
   }, []);
