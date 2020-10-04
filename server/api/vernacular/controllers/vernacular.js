@@ -7,7 +7,6 @@ const { sanitizeEntity } = require('strapi-utils');
 
 module.exports = {
   findOne: async ctx => {
-    console.log('vernac findOne', typeof ctx);
     const { id } = ctx.params;
     const entity = await strapi.services.vernacular.findOne(
       { id },
